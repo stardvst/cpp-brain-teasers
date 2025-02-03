@@ -1,0 +1,66 @@
+{
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "C/C++: create build folder for current file",
+      "command": "mkdir -p ./build/${relativeFileDirname}",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "type": "shell",
+      "label": "C/C++: clang++ release build current file",
+      "command": "/usr/bin/clang++",
+      "args": [
+        "-fcolor-diagnostics",
+        "-std=c++20",
+        "-O2",
+        "${file}",
+        "-o",
+        "${workspaceFolder}/build/${relativeFileDirname}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Builds the current file (release mode) using clang++",
+      "dependsOn": "C/C++: create build folder for current file"
+    },
+    {
+      "type": "shell",
+      "label": "C/C++: clang++ debug build current file",
+      "command": "/usr/bin/clang++",
+      "args": [
+        "-fcolor-diagnostics",
+        "-std=c++20",
+        "-g",
+        "-O0",
+        "${file}",
+        "-o",
+        "${workspaceFolder}/build/${relativeFileDirname}/${fileBasenameNoExtension}_debug"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "detail": "Builds the current file (debug mode) using clang++",
+      "dependsOn": "C/C++: create build folder for current file"
+    }
+  ],
+  "version": "2.0.0"
+}
